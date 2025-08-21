@@ -26,6 +26,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object
 
 ### 🔧 **Core Development Tools**
 - **Git** - Version control system
+- **GitHub Desktop** - Graphical Git interface
 - **Node.js & npm** - JavaScript runtime and package manager  
 - **Python 3** - Programming language with pip
 - **Package Managers** - Homebrew (macOS) / Chocolatey (Windows)
@@ -51,6 +52,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object
 
 ### 🐳 **Additional Tools**
 - **Docker Desktop** - Containerization
+- **MAMP** - Local development server (Apache, MySQL, PHP)
 - **Databases** - PostgreSQL, MySQL, Redis, MongoDB
 - **WSL 2 + Ubuntu** - Linux environment (Windows only)
 
@@ -186,6 +188,10 @@ code .                       # VS Code with Claude extensions
 git status                   # Check git status
 npm init                     # Initialize Node.js project
 python --version             # Check Python version
+
+# GitHub and Local Development
+github                       # Open GitHub Desktop
+open /Applications/MAMP      # Start MAMP (macOS)
 
 # Platform Specific
 # macOS

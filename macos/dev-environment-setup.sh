@@ -367,6 +367,36 @@ install_cursor() {
     fi
 }
 
+install_github_desktop() {
+    print_header "Installing GitHub Desktop"
+    
+    if [ -d "/Applications/GitHub Desktop.app" ]; then
+        print_success "GitHub Desktop already installed"
+    else
+        print_step "Installing GitHub Desktop..."
+        brew install --cask github
+        print_success "GitHub Desktop installed"
+    fi
+    
+    print_info "GitHub Desktop provides a graphical interface for Git operations"
+    print_info "You can sign in with your GitHub account after installation"
+}
+
+install_mamp() {
+    print_header "Installing MAMP (Local Development Server)"
+    
+    if [ -d "/Applications/MAMP" ]; then
+        print_success "MAMP already installed"
+    else
+        print_step "Installing MAMP..."
+        brew install --cask mamp
+        print_success "MAMP installed"
+    fi
+    
+    print_info "MAMP provides Apache, MySQL, and PHP for local web development"
+    print_info "Access MAMP control panel from Applications folder"
+}
+
 #######################################################################################
 # Additional Development Tools
 #######################################################################################
@@ -485,6 +515,8 @@ verify_installations() {
     # Additional Tools
     echo -e "\n${CYAN}Additional Tools:${NC}"
     [ -d "/Applications/Docker.app" ] && echo "  ✅ Docker Desktop: Installed" || echo "  ❌ Docker: Not installed"
+    [ -d "/Applications/GitHub Desktop.app" ] && echo "  ✅ GitHub Desktop: Installed" || echo "  ❌ GitHub Desktop: Not installed"
+    [ -d "/Applications/MAMP" ] && echo "  ✅ MAMP: Installed" || echo "  ❌ MAMP: Not installed"
     command_exists psql && echo "  ✅ PostgreSQL: Installed" || echo "  ❌ PostgreSQL: Not installed"
     command_exists mysql && echo "  ✅ MySQL: Installed" || echo "  ❌ MySQL: Not installed"
     command_exists redis-cli && echo "  ✅ Redis: Installed" || echo "  ❌ Redis: Not installed"
@@ -522,6 +554,7 @@ main_menu() {
     echo "║  • VS Code & Cursor Editor                                    ║"
     echo "║  • Claude Code with 74+ specialized agents                    ║"
     echo "║  • Qwen Coder & GitHub Copilot                               ║"
+    echo "║  • GitHub Desktop & MAMP local server                         ║"
     echo "║  • Docker, databases, and mobile dev tools                    ║"
     echo "╚════════════════════════════════════════════════════════════════╝"
     echo -e "${NC}"
@@ -598,6 +631,8 @@ full_installation() {
     
     # Additional tools
     install_docker
+    install_github_desktop
+    install_mamp
     install_database_tools
     
     # Configuration
@@ -621,6 +656,8 @@ core_tools_installation() {
     install_nodejs
     install_python
     install_vscode
+    install_github_desktop
+    install_mamp
     configure_git
     verify_installations
 }
