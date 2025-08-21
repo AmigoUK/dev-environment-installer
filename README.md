@@ -6,6 +6,7 @@
 [![Windows](https://img.shields.io/badge/Windows-10%2F11-blue?logo=windows)](./windows/)
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
 [![Flutter](https://img.shields.io/badge/Flutter-3.35.1-blue?logo=flutter)](https://flutter.dev)
+[![Python](https://img.shields.io/badge/Python-3.12-blue?logo=python)](https://python.org)
 [![Claude](https://img.shields.io/badge/Claude-Code%20%2B%2074%20Agents-orange)](https://claude.ai)
 
 ## 🎯 Quick Install
@@ -27,8 +28,8 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object
 ### 🔧 **Core Development Tools**
 - **Git** - Version control system
 - **GitHub Desktop** - Graphical Git interface
-- **Node.js & npm** - JavaScript runtime and package manager  
-- **Python 3** - Programming language with pip
+- **Node.js & npm** - Via NVM for version management  
+- **Python 3.12** - Programming language with pip
 - **Package Managers** - Homebrew (macOS) / Chocolatey (Windows)
 
 ### 🎨 **IDEs & Editors**
@@ -37,7 +38,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object
 - **Cursor Editor** - AI-powered VS Code fork
 
 ### 📱 **Mobile Development Stack**
-- **Flutter SDK** - Cross-platform UI toolkit
+- **Flutter SDK 3.35.1** - Cross-platform UI toolkit
 - **Android SDK** - Android development platform
 - **Firebase CLI** - Backend services
 - **Fastlane** - Deployment automation
@@ -53,7 +54,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object
 ### 🐳 **Additional Tools**
 - **Docker Desktop** - Containerization
 - **MAMP** - Local development server (Apache, MySQL, PHP)
-- **Databases** - PostgreSQL, MySQL (via MAMP on macOS), Redis, MongoDB
+- **Databases** - PostgreSQL, MySQL (via MAMP), Redis, MongoDB
 - **WSL 2 + Ubuntu** - Linux environment (Windows only)
 
 ## 🖥️ Platform-Specific Features

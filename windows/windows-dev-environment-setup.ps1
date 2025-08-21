@@ -153,25 +153,6 @@ function Install-Chocolatey {
     }
 }
 
-function Install-Winget {
-    Write-Header "Setting up Windows Package Manager (winget)"
-    
-    if (Test-Command "winget") {
-        Write-Success "winget already available"
-    } else {
-        Write-Step "Installing App Installer (winget)..."
-        try {
-            $url = "https://github.com/microsoft/winget-cli/releases/latest/download/Microsoft.DesktopAppInstaller_8wekyb3d8bbwe.msixbundle"
-            $output = "$env:TEMP\winget.msixbundle"
-            Invoke-WebRequest -Uri $url -OutFile $output
-            Add-AppxPackage -Path $output
-            Write-Success "winget installed"
-        }
-        catch {
-            Write-Warning "Failed to install winget. Some installations may fall back to Chocolatey."
-        }
-    }
-}
 
 #################################################################################################
 # WSL Setup
@@ -222,7 +203,7 @@ function Install-Ubuntu {
     
     Write-Step "Installing Ubuntu from Microsoft Store..."
     try {
-        winget install Canonical.Ubuntu.2204 --silent --accept-package-agreements --accept-source-agreements
+        choco install wsl-ubuntu-2204 --yes
         Write-Success "Ubuntu 22.04 LTS installed"
     }
     catch {
@@ -245,7 +226,7 @@ function Install-Git {
         Write-Success "Git already installed: $(git --version)"
     } else {
         Write-Step "Installing Git for Windows..."
-        winget install Git.Git --silent --accept-package-agreements --accept-source-agreements
+        choco install git --yes
         refreshenv
         Write-Success "Git for Windows installed"
     }
@@ -259,25 +240,25 @@ function Install-Git {
 }
 
 function Install-NodeJS {
-    Write-Header "Installing Node.js and npm"
+    Write-Header "Installing Node.js via NVM"
     
-    if (Test-Command "node") {
-        Write-Success "Node.js already installed: $(node --version)"
-    } else {
-        Write-Step "Installing Node.js LTS..."
-        winget install OpenJS.NodeJS.LTS --silent --accept-package-agreements --accept-source-agreements
-        refreshenv
-        Write-Success "Node.js installed"
-    }
-    
-    # Install NVM for Windows
+    # Install NVM for Windows first
     Write-Step "Installing NVM for Windows..."
     if (-not (Test-Path "$env:APPDATA\nvm")) {
-        $nvmUrl = "https://github.com/coreybutler/nvm-windows/releases/latest/download/nvm-setup.exe"
-        $nvmInstaller = "$env:TEMP\nvm-setup.exe"
-        Invoke-WebRequest -Uri $nvmUrl -OutFile $nvmInstaller
-        Start-Process -FilePath $nvmInstaller -ArgumentList "/silent" -Wait
+        choco install nvm --yes
+        refreshenv
         Write-Success "NVM for Windows installed"
+    }
+    
+    # Install Node.js LTS via NVM
+    if (-not (Test-Command "node")) {
+        Write-Step "Installing Node.js LTS via NVM..."
+        nvm install lts
+        nvm use lts
+        refreshenv
+        Write-Success "Node.js LTS installed via NVM: $(node --version)"
+    } else {
+        Write-Success "Node.js already installed: $(node --version)"
     }
 }
 
@@ -287,8 +268,8 @@ function Install-Python {
     if (Test-Command "python") {
         Write-Success "Python already installed: $(python --version)"
     } else {
-        Write-Step "Installing Python..."
-        winget install Python.Python.3.12 --silent --accept-package-agreements --accept-source-agreements
+        Write-Step "Installing Python 3.12..."
+        choco install python312 --yes
         refreshenv
         Write-Success "Python installed"
     }
@@ -305,7 +286,7 @@ function Install-AndroidStudio {
         Write-Success "Android Studio already installed"
     } else {
         Write-Step "Installing Android Studio..."
-        winget install Google.AndroidStudio --silent --accept-package-agreements --accept-source-agreements
+        choco install androidstudio --yes
         Write-Success "Android Studio installed"
     }
     
@@ -328,7 +309,7 @@ function Install-VSCode {
         Write-Success "VS Code already installed"
     } else {
         Write-Step "Installing VS Code..."
-        winget install Microsoft.VisualStudioCode --silent --accept-package-agreements --accept-source-agreements
+        choco install vscode --yes
         refreshenv
         Write-Success "VS Code installed"
     }
@@ -395,14 +376,8 @@ function Install-ClaudeCode {
     
     Write-Step "Installing Claude Desktop app..."
     if (-not (Get-AppxPackage | Where-Object {$_.Name -like "*Claude*"})) {
-        try {
-            # Try winget first
-            winget install Anthropic.Claude --silent --accept-package-agreements --accept-source-agreements
-            Write-Success "Claude Desktop app installed via winget"
-        }
-        catch {
-            Write-Info "Claude Desktop not available via winget. Please install manually from https://claude.ai/download"
-        }
+        Write-Info "Please download and install Claude Desktop manually from https://claude.ai/download"
+        Write-Info "Claude Desktop is not available via Chocolatey"
     }
     
     Write-Step "Installing Claude Code CLI..."
@@ -494,7 +469,7 @@ function Install-Cursor {
     } else {
         Write-Step "Installing Cursor Editor..."
         try {
-            winget install anysphere.cursor --silent --accept-package-agreements --accept-source-agreements
+            choco install cursor --yes
             Write-Success "Cursor Editor installed"
         }
         catch {
@@ -514,7 +489,7 @@ function Install-Docker {
         Write-Success "Docker already installed"
     } else {
         Write-Step "Installing Docker Desktop..."
-        winget install Docker.DockerDesktop --silent --accept-package-agreements --accept-source-agreements
+        choco install docker-desktop --yes
         Write-Success "Docker Desktop installed"
         Write-Info "Docker Desktop requires a restart to complete installation"
     }
@@ -526,8 +501,8 @@ function Install-DatabaseTools {
     Write-Step "Installing PostgreSQL..."
     choco install postgresql --yes
     
-    Write-Step "Installing MySQL..."
-    choco install mysql --yes
+    Write-Step "Installing MAMP (Apache, MySQL, PHP)..."
+    choco install mamp --yes
     
     Write-Step "Installing Redis..."
     choco install redis-64 --yes
@@ -566,8 +541,6 @@ function Setup-WSLDevelopment {
         "sudo apt update",
         "sudo apt upgrade -y",
         "sudo apt install -y curl git build-essential",
-        "curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -",
-        "sudo apt install -y nodejs",
         "curl -sSL https://install.python-poetry.org | python3 -",
         "sudo snap install flutter --classic",
         "git clone https://github.com/wshobson/agents.git ~/.claude/agents"
@@ -639,6 +612,7 @@ function Test-Installations {
     # Additional Tools
     Write-Host "`nAdditional Tools:" -ForegroundColor Cyan
     if (Test-Command "docker") { Write-Host "  ✅ Docker Desktop: Installed" -ForegroundColor Green } else { Write-Host "  ❌ Docker: Not installed" -ForegroundColor Red }
+    if (Test-Path "${env:ProgramFiles(x86)}\MAMP") { Write-Host "  ✅ MAMP: Installed" -ForegroundColor Green } else { Write-Host "  ❌ MAMP: Not installed" -ForegroundColor Red }
 }
 
 function New-TestProject {
@@ -709,7 +683,6 @@ function Invoke-FullInstallation {
     
     # Package managers
     Install-Chocolatey
-    Install-Winget
     
     # WSL setup
     Install-WSL
@@ -758,7 +731,6 @@ function Invoke-NativeWindowsInstallation {
     Test-WindowsVersion
     Test-AdminRights
     Install-Chocolatey
-    Install-Winget
     Install-Git
     Install-NodeJS
     Install-Python

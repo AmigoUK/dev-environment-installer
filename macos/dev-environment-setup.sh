@@ -209,18 +209,44 @@ install_vscode() {
 }
 
 install_flutter() {
-    print_header "Installing Flutter SDK"
+    print_header "Installing Flutter SDK 3.35.1"
     
     if command_exists flutter; then
         print_success "Flutter already installed: $(flutter --version | head -1)"
     else
-        print_step "Installing Flutter..."
-        brew install --cask flutter
+        print_step "Installing Flutter 3.35.1..."
+        
+        # Create Flutter directory
+        flutter_dir="$HOME/flutter"
+        if [[ ! -d "$flutter_dir" ]]; then
+            mkdir -p "$flutter_dir"
+        fi
+        
+        # Download and extract Flutter 3.35.1
+        print_step "Downloading Flutter SDK..."
+        if [[ $(uname -m) == "arm64" ]]; then
+            flutter_url="https://storage.googleapis.com/flutter_infra_release/releases/stable/macos/flutter_macos_arm64_3.35.1-stable.zip"
+        else
+            flutter_url="https://storage.googleapis.com/flutter_infra_release/releases/stable/macos/flutter_macos_3.35.1-stable.zip"
+        fi
+        
+        cd "$HOME"
+        curl -L "$flutter_url" -o flutter_macos_stable.zip
+        unzip -q flutter_macos_stable.zip
+        rm flutter_macos_stable.zip
         
         # Add Flutter to PATH
         if ! grep -q "flutter/bin" "$HOME/.zshrc" 2>/dev/null; then
-            echo 'export PATH="/opt/homebrew/share/flutter/bin:$PATH"' >> "$HOME/.zshrc"
+            echo 'export PATH="$HOME/flutter/bin:$PATH"' >> "$HOME/.zshrc"
         fi
+        if ! grep -q "flutter/bin" "$HOME/.bash_profile" 2>/dev/null; then
+            echo 'export PATH="$HOME/flutter/bin:$PATH"' >> "$HOME/.bash_profile"
+        fi
+        
+        # Make sure Flutter is in PATH for this session
+        export PATH="$HOME/flutter/bin:$PATH"
+        
+        print_success "Flutter SDK 3.35.1 installed"
         
         print_step "Accepting Android licenses..."
         yes | flutter doctor --android-licenses 2>/dev/null || true
@@ -232,30 +258,45 @@ install_flutter() {
 }
 
 install_nodejs() {
-    print_header "Installing Node.js and npm"
-    
-    if command_exists node; then
-        print_success "Node.js already installed: $(node --version)"
-    else
-        print_step "Installing Node.js..."
-        brew install node
-    fi
+    print_header "Installing Node.js via NVM"
     
     # Install NVM for Node version management
     if [ ! -d "$HOME/.nvm" ]; then
         print_step "Installing NVM (Node Version Manager)..."
         curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
+        
+        # Source NVM for current session
+        export NVM_DIR="$HOME/.nvm"
+        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+        [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+    fi
+    
+    # Install latest LTS Node.js via NVM
+    if ! command_exists node; then
+        print_step "Installing Node.js LTS via NVM..."
+        export NVM_DIR="$HOME/.nvm"
+        [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+        nvm install --lts
+        nvm use --lts
+        nvm alias default lts/*
+        print_success "Node.js LTS installed via NVM: $(node --version)"
+    else
+        print_success "Node.js already installed: $(node --version)"
     fi
 }
 
 install_python() {
-    print_header "Installing Python"
+    print_header "Installing Python 3.12"
     
     if command_exists python3; then
         print_success "Python already installed: $(python3 --version)"
     else
-        print_step "Installing Python..."
-        brew install python
+        print_step "Installing Python 3.12..."
+        brew install python@3.12
+        # Create symlinks for python3 if they don't exist
+        if [[ ! -e /opt/homebrew/bin/python3 ]]; then
+            ln -sf /opt/homebrew/bin/python3.12 /opt/homebrew/bin/python3
+        fi
     fi
     
     # Install pip packages
@@ -282,15 +323,14 @@ install_claude_code() {
     fi
     
     # Install Claude Code CLI
-    if [ ! -f "$HOME/.claude/local/claude" ]; then
-        print_step "Installing Claude Code CLI..."
-        mkdir -p "$HOME/.claude/local"
-        curl -fsSL https://storage.googleapis.com/anthropic-public-scripts/claude-cli/install.sh | sh
-    fi
-    
-    # Add alias to .zshrc if not exists
-    if ! grep -q "alias claude=" "$HOME/.zshrc" 2>/dev/null; then
-        echo 'alias claude="$HOME/.claude/local/claude"' >> "$HOME/.zshrc"
+    if ! command_exists claude; then
+        print_step "Installing Claude Code CLI via npm..."
+        if command_exists npm; then
+            npm install -g @anthropic-ai/claude-code
+            print_success "Claude Code CLI installed via npm"
+        else
+            print_warning "Node.js/npm not found. Please install Node.js first"
+        fi
     fi
     
     print_success "Claude Code installed"
@@ -506,7 +546,7 @@ verify_installations() {
     # AI Assistants
     echo -e "\n${CYAN}AI Coding Assistants:${NC}"
     [ -d "/Applications/Claude.app" ] && echo "  ✅ Claude Desktop: Installed" || echo "  ❌ Claude: Not installed"
-    [ -f "$HOME/.claude/local/claude" ] && echo "  ✅ Claude Code CLI: Installed" || echo "  ❌ Claude Code CLI: Not installed"
+    command_exists claude && echo "  ✅ Claude Code CLI: Installed" || echo "  ❌ Claude Code CLI: Not installed"
     [ -d "$HOME/.claude/agents" ] && echo "  ✅ Claude Agents: Installed" || echo "  ❌ Claude Agents: Not installed"
     command_exists ollama && echo "  ✅ Ollama (Qwen): Installed" || echo "  ❌ Ollama: Not installed"
     

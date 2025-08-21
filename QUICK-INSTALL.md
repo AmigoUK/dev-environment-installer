@@ -36,12 +36,12 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/AmigoUK/dev-environmen
 
 ## 📋 What Gets Installed
 
-- **Core Tools**: Git, GitHub Desktop, Node.js, Python, Package Managers
+- **Core Tools**: Git, GitHub Desktop, Node.js (via NVM), Python 3.12, Package Managers
 - **IDEs**: Android Studio, VS Code, Cursor Editor  
-- **Mobile Dev**: Flutter SDK, Firebase CLI, Android SDK
+- **Mobile Dev**: Flutter SDK 3.35.1, Firebase CLI, Android SDK
 - **AI Assistants**: Claude Code + 74 agents, Qwen Coder, GitHub Copilot
 - **Local Development**: MAMP (Apache, MySQL, PHP)
-- **Additional**: Docker, Databases (PostgreSQL, MySQL via MAMP, Redis, MongoDB)
+- **Additional**: Docker, MAMP (Apache/MySQL/PHP), Databases (PostgreSQL, Redis, MongoDB)
 - **Platform Specific**: WSL2 + Ubuntu (Windows), Homebrew (macOS)
 
 ## 🎯 Installation Options
