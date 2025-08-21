@@ -491,6 +491,17 @@ install_database_tools() {
     print_step "Installing PostgreSQL..."
     brew install postgresql@16
     
+    # Add PostgreSQL to PATH
+    if ! grep -q "postgresql@16/bin" "$HOME/.zshrc" 2>/dev/null; then
+        echo 'export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"' >> "$HOME/.zshrc"
+    fi
+    if ! grep -q "postgresql@16/bin" "$HOME/.bash_profile" 2>/dev/null; then
+        echo 'export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"' >> "$HOME/.bash_profile"
+    fi
+    
+    # Make PostgreSQL available in current session
+    export PATH="/opt/homebrew/opt/postgresql@16/bin:$PATH"
+    
     
     print_step "Installing Redis..."
     brew install redis
