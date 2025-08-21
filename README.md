@@ -308,7 +308,7 @@ MIT License - see [LICENSE](./LICENSE) file for details.
 
 - **Claude Code** by Anthropic
 - **Flutter** by Google
-- **AI Agents Collection** by [wshobson](https://github.com/wshobson/agents)
+- **AI Agents Collection** by [wshobson](https://github.com/wshobson/agents) - amazing collection! I love most of them!
 - **Open Source Community** for all the amazing tools
 
 ## 📞 Support
