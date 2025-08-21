@@ -13,13 +13,13 @@
 ### macOS Installation
 ```bash
 # Download and run
-curl -fsSL https://raw.githubusercontent.com/tomaszlewandowski/dev-environment-installer/main/macos/dev-environment-setup.sh -o setup.sh && chmod +x setup.sh && ./setup.sh
+curl -fsSL https://raw.githubusercontent.com/AmigoUK/dev-environment-installer/main/macos/dev-environment-setup.sh -o setup.sh && chmod +x setup.sh && ./setup.sh
 ```
 
 ### Windows Installation
 ```powershell
 # Run as Administrator
-Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/tomaszlewandowski/dev-environment-installer/main/windows/windows-dev-environment-setup.ps1'))
+Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/AmigoUK/dev-environment-installer/main/windows/windows-dev-environment-setup.ps1'))
 ```
 
 ## 📦 What Gets Installed
@@ -72,12 +72,12 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object
 
 **macOS:**
 ```bash
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/tomaszlewandowski/dev-environment-installer/main/macos/dev-environment-setup.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmigoUK/dev-environment-installer/main/macos/dev-environment-setup.sh)"
 ```
 
 **Windows (PowerShell as Administrator):**
 ```powershell
-Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/tomaszlewandowski/dev-environment-installer/main/windows/windows-dev-environment-setup.ps1'))
+Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/AmigoUK/dev-environment-installer/main/windows/windows-dev-environment-setup.ps1'))
 ```
 
 ### Option 2: Manual Download
@@ -85,7 +85,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object
 **macOS:**
 ```bash
 # Download
-curl -fsSL https://raw.githubusercontent.com/tomaszlewandowski/dev-environment-installer/main/macos/dev-environment-setup.sh -o dev-setup.sh
+curl -fsSL https://raw.githubusercontent.com/AmigoUK/dev-environment-installer/main/macos/dev-environment-setup.sh -o dev-setup.sh
 
 # Make executable
 chmod +x dev-setup.sh
@@ -97,7 +97,7 @@ chmod +x dev-setup.sh
 **Windows:**
 ```powershell
 # Download
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/tomaszlewandowski/dev-environment-installer/main/windows/windows-dev-environment-setup.ps1" -OutFile "dev-setup.ps1"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/AmigoUK/dev-environment-installer/main/windows/windows-dev-environment-setup.ps1" -OutFile "dev-setup.ps1"
 
 # Run as Administrator
 .\dev-setup.ps1
@@ -105,7 +105,7 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/tomaszlewandowski/dev-
 
 ### Option 3: Clone Repository
 ```bash
-git clone https://github.com/tomaszlewandowski/dev-environment-installer.git
+git clone https://github.com/AmigoUK/dev-environment-installer.git
 cd dev-environment-installer
 
 # macOS
@@ -313,9 +313,9 @@ MIT License - see [LICENSE](./LICENSE) file for details.
 
 ## 📞 Support
 
-- **Issues**: [GitHub Issues](https://github.com/tomaszlewandowski/dev-environment-installer/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/tomaszlewandowski/dev-environment-installer/discussions)
-- **Documentation**: [Wiki](https://github.com/tomaszlewandowski/dev-environment-installer/wiki)
+- **Issues**: [GitHub Issues](https://github.com/AmigoUK/dev-environment-installer/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/AmigoUK/dev-environment-installer/discussions)
+- **Documentation**: [Wiki](https://github.com/AmigoUK/dev-environment-installer/wiki)
 
 ---
 
@@ -323,8 +323,8 @@ MIT License - see [LICENSE](./LICENSE) file for details.
 
 ```bash
 # macOS
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/tomaszlewandowski/dev-environment-installer/main/macos/dev-environment-setup.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmigoUK/dev-environment-installer/main/macos/dev-environment-setup.sh)"
 
 # Windows (PowerShell as Admin)
-Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/tomaszlewandowski/dev-environment-installer/main/windows/windows-dev-environment-setup.ps1'))
+Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/AmigoUK/dev-environment-installer/main/windows/windows-dev-environment-setup.ps1'))
 ```

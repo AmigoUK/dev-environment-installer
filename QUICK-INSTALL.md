@@ -1,17 +1,17 @@
 # ⚡ Quick Installation Reference
 
-**Replace `YOUR_USERNAME` with your actual GitHub username**
+**One-click installation commands for AmigoUK/dev-environment-installer**
 
 ## 🚀 One-Click Installation
 
 ### macOS
 ```bash
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/YOUR_USERNAME/dev-environment-installer/main/macos/dev-environment-setup.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/AmigoUK/dev-environment-installer/main/macos/dev-environment-setup.sh)"
 ```
 
 ### Windows (PowerShell as Administrator)
 ```powershell
-Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/YOUR_USERNAME/dev-environment-installer/main/windows/windows-dev-environment-setup.ps1'))
+Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/AmigoUK/dev-environment-installer/main/windows/windows-dev-environment-setup.ps1'))
 ```
 
 ## 📥 Manual Download
@@ -19,7 +19,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object
 ### macOS
 ```bash
 # Download
-curl -fsSL https://raw.githubusercontent.com/YOUR_USERNAME/dev-environment-installer/main/macos/dev-environment-setup.sh -o dev-setup.sh
+curl -fsSL https://raw.githubusercontent.com/AmigoUK/dev-environment-installer/main/macos/dev-environment-setup.sh -o dev-setup.sh
 
 # Make executable and run
 chmod +x dev-setup.sh && ./dev-setup.sh
@@ -28,7 +28,7 @@ chmod +x dev-setup.sh && ./dev-setup.sh
 ### Windows
 ```powershell
 # Download
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/YOUR_USERNAME/dev-environment-installer/main/windows/windows-dev-environment-setup.ps1" -OutFile "dev-setup.ps1"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/AmigoUK/dev-environment-installer/main/windows/windows-dev-environment-setup.ps1" -OutFile "dev-setup.ps1"
 
 # Run as Administrator
 .\dev-setup.ps1
@@ -77,5 +77,5 @@ flutter run
 ---
 
 **🌟 Star the repository if this helped you!**
-**🐛 Report issues**: [GitHub Issues](https://github.com/YOUR_USERNAME/dev-environment-installer/issues)
-**💬 Discussions**: [GitHub Discussions](https://github.com/YOUR_USERNAME/dev-environment-installer/discussions)
+**🐛 Report issues**: [GitHub Issues](https://github.com/AmigoUK/dev-environment-installer/issues)
+**💬 Discussions**: [GitHub Discussions](https://github.com/AmigoUK/dev-environment-installer/discussions)
