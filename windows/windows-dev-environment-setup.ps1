@@ -80,7 +80,8 @@ function Add-ToPath {
     param([string]$Path)
     $currentPath = [Environment]::GetEnvironmentVariable("PATH", "User")
     if ($currentPath -notlike "*$Path*") {
-        [Environment]::SetEnvironmentVariable("PATH", "$currentPath;$Path", "User")
+        $newPath = "$currentPath;$Path"
+        [Environment]::SetEnvironmentVariable("PATH", $newPath, "User")
         Write-Success "Added $Path to PATH"
     }
 }
@@ -419,12 +420,12 @@ function Install-ClaudeAgents {
     
     Write-Success "Claude agents installed successfully"
     Write-Info "Available agent categories:"
-    Write-Host "  • Development & Architecture agents" -ForegroundColor Gray
-    Write-Host "  • Language-specific specialists (Python, JS, Go, Rust, etc.)" -ForegroundColor Gray
-    Write-Host "  • Infrastructure & DevOps agents" -ForegroundColor Gray
-    Write-Host "  • Security & Quality agents" -ForegroundColor Gray
-    Write-Host "  • Data Science & AI agents" -ForegroundColor Gray
-    Write-Host "  • Business & Marketing agents" -ForegroundColor Gray
+    Write-Host "  - Development and Architecture agents" -ForegroundColor Gray
+    Write-Host "  - Language-specific specialists (Python, JS, Go, Rust, etc.)" -ForegroundColor Gray
+    Write-Host "  - Infrastructure and DevOps agents" -ForegroundColor Gray
+    Write-Host "  - Security and Quality agents" -ForegroundColor Gray
+    Write-Host "  - Data Science and AI agents" -ForegroundColor Gray
+    Write-Host "  - Business and Marketing agents" -ForegroundColor Gray
 }
 
 function Install-QwenCode {
@@ -501,7 +502,7 @@ function Install-DatabaseTools {
     Write-Step "Installing PostgreSQL..."
     choco install postgresql --yes
     
-    Write-Step "Installing MAMP (Apache, MySQL, PHP)..."
+    Write-Step "Installing MAMP (Apache MySQL PHP)..."
     choco install mamp --yes
     
     Write-Step "Installing Redis..."
@@ -641,13 +642,13 @@ function Show-MainMenu {
     Write-Host "║    Windows Complete Development Environment Installer v$ScriptVersion    ║" -ForegroundColor Magenta
     Write-Host "║                                                                ║" -ForegroundColor Magenta
     Write-Host "║  This script will install:                                    ║" -ForegroundColor Magenta
-    Write-Host "║  • WSL 2 with Ubuntu for Linux development                    ║" -ForegroundColor Magenta
-    Write-Host "║  • Core development tools (Git, Node.js, Python)              ║" -ForegroundColor Magenta
-    Write-Host "║  • Android Studio & Flutter SDK                               ║" -ForegroundColor Magenta
-    Write-Host "║  • VS Code & Cursor Editor                                    ║" -ForegroundColor Magenta
-    Write-Host "║  • Claude Code with 74+ specialized agents                    ║" -ForegroundColor Magenta
-    Write-Host "║  • Qwen Coder & GitHub Copilot                               ║" -ForegroundColor Magenta
-    Write-Host "║  • Docker, databases, and mobile dev tools                    ║" -ForegroundColor Magenta
+    Write-Host "║  - WSL 2 with Ubuntu for Linux development                    ║" -ForegroundColor Magenta
+    Write-Host "║  - Core development tools (Git, Node.js, Python)              ║" -ForegroundColor Magenta
+    Write-Host "║  - Android Studio and Flutter SDK                             ║" -ForegroundColor Magenta
+    Write-Host "║  - VS Code and Cursor Editor                                  ║" -ForegroundColor Magenta
+    Write-Host "║  - Claude Code with 74+ specialized agents                    ║" -ForegroundColor Magenta
+    Write-Host "║  - Qwen Coder and GitHub Copilot                             ║" -ForegroundColor Magenta
+    Write-Host "║  - Docker, databases, and mobile dev tools                    ║" -ForegroundColor Magenta
     Write-Host "╚════════════════════════════════════════════════════════════════╝" -ForegroundColor Magenta
     
     Write-Host "`nInstallation Options:" -ForegroundColor Yellow
@@ -801,16 +802,16 @@ function Show-CompletionMessage {
     Write-Host "  6. Configure GitHub Copilot in VS Code"
     
     Write-Host "`nQuick Commands:" -ForegroundColor Cyan
-    Write-Host "  • Start coding (Windows):  code ."
-    Write-Host "  • Start coding (WSL):      wsl code ."
-    Write-Host "  • Use Claude Code:         claude"
-    Write-Host "  • Run Qwen Coder:          ollama run qwen2.5-coder:7b"
-    Write-Host "  • Create Flutter app:      flutter create my_app"
-    Write-Host "  • Open WSL:                wsl"
+    Write-Host "  - Start coding (Windows):  code ."
+    Write-Host "  - Start coding (WSL):      wsl code ."
+    Write-Host "  - Use Claude Code:         claude"
+    Write-Host "  - Run Qwen Coder:          ollama run qwen2.5-coder:7b"
+    Write-Host "  - Create Flutter app:      flutter create my_app"
+    Write-Host "  - Open WSL:                wsl"
     
     Write-Host "`nClaude Code Setup Options:" -ForegroundColor Cyan
-    Write-Host "  • WSL: Use 'wsl' command to access Linux environment"
-    Write-Host "  • Git Bash: Configured at $env:CLAUDE_CODE_GIT_BASH_PATH"
+    Write-Host "  - WSL: Use 'wsl' command to access Linux environment"
+    Write-Host "  - Git Bash: Configured at $env:CLAUDE_CODE_GIT_BASH_PATH"
     
     Write-Host "`nInstallation log saved to: $LogFile" -ForegroundColor Blue
 }
