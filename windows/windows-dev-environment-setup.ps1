@@ -32,37 +32,37 @@ $Colors = @{
 function Write-Header {
     param([string]$Text)
     Write-Host ""
-    Write-Host "═══════════════════════════════════════════════════════════════" -ForegroundColor Blue
+    Write-Host "===============================================================" -ForegroundColor Blue
     Write-Host "  $Text" -ForegroundColor Cyan
-    Write-Host "═══════════════════════════════════════════════════════════════" -ForegroundColor Blue
+    Write-Host "===============================================================" -ForegroundColor Blue
     Write-Host ""
 }
 
 function Write-Step {
     param([string]$Text)
-    Write-Host "▶ $Text" -ForegroundColor Yellow
+    Write-Host "> $Text" -ForegroundColor Yellow
 }
 
 function Write-Success {
     param([string]$Text)
-    Write-Host "✅ $Text" -ForegroundColor Green
+    Write-Host "[OK] $Text" -ForegroundColor Green
 }
 
 function Write-Error {
     param([string]$Text)
-    Write-Host "❌ $Text" -ForegroundColor Red
+    Write-Host "[ERROR] $Text" -ForegroundColor Red
     $script:ErrorsFound++
     Add-Content -Path $LogFile -Value "[ERROR] $(Get-Date): $Text"
 }
 
 function Write-Info {
     param([string]$Text)
-    Write-Host "ℹ️  $Text" -ForegroundColor Blue
+    Write-Host "[INFO] $Text" -ForegroundColor Blue
 }
 
 function Write-Warning {
     param([string]$Text)
-    Write-Host "⚠️  $Text" -ForegroundColor Yellow
+    Write-Host "[WARN] $Text" -ForegroundColor Yellow
 }
 
 function Test-Command {
@@ -582,38 +582,38 @@ function Test-Installations {
     
     # Core Tools
     Write-Host "Core Tools:" -ForegroundColor Cyan
-    if (Test-Command "git") { Write-Host "  ✅ Git: $(git --version)" -ForegroundColor Green } else { Write-Host "  ❌ Git: Not installed" -ForegroundColor Red }
-    if (Test-Command "node") { Write-Host "  ✅ Node.js: $(node --version)" -ForegroundColor Green } else { Write-Host "  ❌ Node.js: Not installed" -ForegroundColor Red }
-    if (Test-Command "python") { Write-Host "  ✅ Python: $(python --version)" -ForegroundColor Green } else { Write-Host "  ❌ Python: Not installed" -ForegroundColor Red }
-    if (Test-Command "choco") { Write-Host "  ✅ Chocolatey: $(choco --version)" -ForegroundColor Green } else { Write-Host "  ❌ Chocolatey: Not installed" -ForegroundColor Red }
+    if (Test-Command "git") { Write-Host "  [OK] Git: $(git --version)" -ForegroundColor Green } else { Write-Host "  [ERROR] Git: Not installed" -ForegroundColor Red }
+    if (Test-Command "node") { Write-Host "  [OK] Node.js: $(node --version)" -ForegroundColor Green } else { Write-Host "  [ERROR] Node.js: Not installed" -ForegroundColor Red }
+    if (Test-Command "python") { Write-Host "  [OK] Python: $(python --version)" -ForegroundColor Green } else { Write-Host "  [ERROR] Python: Not installed" -ForegroundColor Red }
+    if (Test-Command "choco") { Write-Host "  [OK] Chocolatey: $(choco --version)" -ForegroundColor Green } else { Write-Host "  [ERROR] Chocolatey: Not installed" -ForegroundColor Red }
     
     # WSL
     Write-Host "`nWSL Environment:" -ForegroundColor Cyan
     try {
         $wslStatus = wsl --status 2>$null
-        if ($wslStatus) { Write-Host "  ✅ WSL: Available" -ForegroundColor Green } else { Write-Host "  ❌ WSL: Not installed" -ForegroundColor Red }
-    } catch { Write-Host "  ❌ WSL: Not installed" -ForegroundColor Red }
+        if ($wslStatus) { Write-Host "  [OK] WSL: Available" -ForegroundColor Green } else { Write-Host "  [ERROR] WSL: Not installed" -ForegroundColor Red }
+    } catch { Write-Host "  [ERROR] WSL: Not installed" -ForegroundColor Red }
     
     # IDEs
     Write-Host "`nIDEs and Editors:" -ForegroundColor Cyan
-    if (Test-Path "${env:ProgramFiles}\Android\Android Studio") { Write-Host "  ✅ Android Studio: Installed" -ForegroundColor Green } else { Write-Host "  ❌ Android Studio: Not installed" -ForegroundColor Red }
-    if (Test-Command "code") { Write-Host "  ✅ VS Code: Installed" -ForegroundColor Green } else { Write-Host "  ❌ VS Code: Not installed" -ForegroundColor Red }
-    if (Test-Path "${env:LOCALAPPDATA}\Programs\Cursor") { Write-Host "  ✅ Cursor: Installed" -ForegroundColor Green } else { Write-Host "  ❌ Cursor: Not installed" -ForegroundColor Red }
+    if (Test-Path "${env:ProgramFiles}\Android\Android Studio") { Write-Host "  [OK] Android Studio: Installed" -ForegroundColor Green } else { Write-Host "  [ERROR] Android Studio: Not installed" -ForegroundColor Red }
+    if (Test-Command "code") { Write-Host "  [OK] VS Code: Installed" -ForegroundColor Green } else { Write-Host "  [ERROR] VS Code: Not installed" -ForegroundColor Red }
+    if (Test-Path "${env:LOCALAPPDATA}\Programs\Cursor") { Write-Host "  [OK] Cursor: Installed" -ForegroundColor Green } else { Write-Host "  [ERROR] Cursor: Not installed" -ForegroundColor Red }
     
     # Mobile Development
     Write-Host "`nMobile Development:" -ForegroundColor Cyan
-    if (Test-Command "flutter") { Write-Host "  ✅ Flutter: $(flutter --version | Select-Object -First 1)" -ForegroundColor Green } else { Write-Host "  ❌ Flutter: Not installed" -ForegroundColor Red }
-    if (Test-Command "firebase") { Write-Host "  ✅ Firebase CLI: Installed" -ForegroundColor Green } else { Write-Host "  ❌ Firebase: Not installed" -ForegroundColor Red }
+    if (Test-Command "flutter") { Write-Host "  [OK] Flutter: $(flutter --version | Select-Object -First 1)" -ForegroundColor Green } else { Write-Host "  [ERROR] Flutter: Not installed" -ForegroundColor Red }
+    if (Test-Command "firebase") { Write-Host "  [OK] Firebase CLI: Installed" -ForegroundColor Green } else { Write-Host "  [ERROR] Firebase: Not installed" -ForegroundColor Red }
     
     # AI Assistants
     Write-Host "`nAI Coding Assistants:" -ForegroundColor Cyan
-    if (Test-Path "$env:USERPROFILE\.claude\agents") { Write-Host "  ✅ Claude Agents: Installed" -ForegroundColor Green } else { Write-Host "  ❌ Claude Agents: Not installed" -ForegroundColor Red }
-    if (Test-Command "ollama") { Write-Host "  ✅ Ollama (Qwen): Installed" -ForegroundColor Green } else { Write-Host "  ❌ Ollama: Not installed" -ForegroundColor Red }
+    if (Test-Path "$env:USERPROFILE\.claude\agents") { Write-Host "  [OK] Claude Agents: Installed" -ForegroundColor Green } else { Write-Host "  [ERROR] Claude Agents: Not installed" -ForegroundColor Red }
+    if (Test-Command "ollama") { Write-Host "  [OK] Ollama (Qwen): Installed" -ForegroundColor Green } else { Write-Host "  [ERROR] Ollama: Not installed" -ForegroundColor Red }
     
     # Additional Tools
     Write-Host "`nAdditional Tools:" -ForegroundColor Cyan
-    if (Test-Command "docker") { Write-Host "  ✅ Docker Desktop: Installed" -ForegroundColor Green } else { Write-Host "  ❌ Docker: Not installed" -ForegroundColor Red }
-    if (Test-Path "${env:ProgramFiles(x86)}\MAMP") { Write-Host "  ✅ MAMP: Installed" -ForegroundColor Green } else { Write-Host "  ❌ MAMP: Not installed" -ForegroundColor Red }
+    if (Test-Command "docker") { Write-Host "  [OK] Docker Desktop: Installed" -ForegroundColor Green } else { Write-Host "  [ERROR] Docker: Not installed" -ForegroundColor Red }
+    if (Test-Path "${env:ProgramFiles(x86)}\MAMP") { Write-Host "  [OK] MAMP: Installed" -ForegroundColor Green } else { Write-Host "  [ERROR] MAMP: Not installed" -ForegroundColor Red }
 }
 
 function New-TestProject {
@@ -638,18 +638,18 @@ function New-TestProject {
 
 function Show-MainMenu {
     Clear-Host
-    Write-Host "╔════════════════════════════════════════════════════════════════╗" -ForegroundColor Magenta
-    Write-Host "║    Windows Complete Development Environment Installer v$ScriptVersion    ║" -ForegroundColor Magenta
-    Write-Host "║                                                                ║" -ForegroundColor Magenta
-    Write-Host "║  This script will install:                                    ║" -ForegroundColor Magenta
-    Write-Host "║  - WSL 2 with Ubuntu for Linux development                    ║" -ForegroundColor Magenta
-    Write-Host "║  - Core development tools (Git, Node.js, Python)              ║" -ForegroundColor Magenta
-    Write-Host "║  - Android Studio and Flutter SDK                             ║" -ForegroundColor Magenta
-    Write-Host "║  - VS Code and Cursor Editor                                  ║" -ForegroundColor Magenta
-    Write-Host "║  - Claude Code with 74+ specialized agents                    ║" -ForegroundColor Magenta
-    Write-Host "║  - Qwen Coder and GitHub Copilot                             ║" -ForegroundColor Magenta
-    Write-Host "║  - Docker, databases, and mobile dev tools                    ║" -ForegroundColor Magenta
-    Write-Host "╚════════════════════════════════════════════════════════════════╝" -ForegroundColor Magenta
+    Write-Host "+================================================================+" -ForegroundColor Magenta
+    Write-Host "|    Windows Complete Development Environment Installer v$ScriptVersion    |" -ForegroundColor Magenta
+    Write-Host "|                                                                |" -ForegroundColor Magenta
+    Write-Host "|  This script will install:                                    |" -ForegroundColor Magenta
+    Write-Host "|  - WSL 2 with Ubuntu for Linux development                    |" -ForegroundColor Magenta
+    Write-Host "|  - Core development tools (Git, Node.js, Python)              |" -ForegroundColor Magenta
+    Write-Host "|  - Android Studio and Flutter SDK                             |" -ForegroundColor Magenta
+    Write-Host "|  - VS Code and Cursor Editor                                  |" -ForegroundColor Magenta
+    Write-Host "|  - Claude Code with 74+ specialized agents                    |" -ForegroundColor Magenta
+    Write-Host "|  - Qwen Coder and GitHub Copilot                             |" -ForegroundColor Magenta
+    Write-Host "|  - Docker, databases, and mobile dev tools                    |" -ForegroundColor Magenta
+    Write-Host "+================================================================+" -ForegroundColor Magenta
     
     Write-Host "`nInstallation Options:" -ForegroundColor Yellow
     Write-Host "  1) Full Installation with WSL (Recommended)"
@@ -783,9 +783,9 @@ function Invoke-MobileToolsInstallation {
 }
 
 function Show-CompletionMessage {
-    Write-Host "`n════════════════════════════════════════════════════════════════" -ForegroundColor Green
-    Write-Host "     🎉 Installation Complete! 🎉" -ForegroundColor Green
-    Write-Host "════════════════════════════════════════════════════════════════`n" -ForegroundColor Green
+    Write-Host "`n================================================================" -ForegroundColor Green
+    Write-Host "     *** Installation Complete! ***" -ForegroundColor Green
+    Write-Host "================================================================`n" -ForegroundColor Green
     
     if ($ErrorsFound -gt 0) {
         Write-Warning "Installation completed with $ErrorsFound errors. Check log: $LogFile"
