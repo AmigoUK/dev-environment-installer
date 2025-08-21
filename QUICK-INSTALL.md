@@ -26,6 +26,8 @@ chmod +x dev-setup.sh && ./dev-setup.sh
 ```
 
 ### Windows
+**⚠️ Use PowerShell as Administrator**
+
 ```powershell
 # Download
 Invoke-WebRequest -Uri "https://raw.githubusercontent.com/AmigoUK/dev-environment-installer/main/windows/windows-dev-environment-setup.ps1" -OutFile "dev-setup.ps1"

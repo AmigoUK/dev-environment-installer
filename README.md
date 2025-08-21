@@ -18,8 +18,12 @@ curl -fsSL https://raw.githubusercontent.com/AmigoUK/dev-environment-installer/m
 ```
 
 ### Windows Installation
+**⚠️ Important: Use PowerShell as Administrator (NOT Command Prompt)**
+
+1. **Right-click Start menu** → **"Windows PowerShell (Admin)"**
+2. **Run this command:**
+
 ```powershell
-# Run as Administrator
 Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://raw.githubusercontent.com/AmigoUK/dev-environment-installer/main/windows/windows-dev-environment-setup.ps1'))
 ```
 
