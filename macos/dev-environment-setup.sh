@@ -299,9 +299,23 @@ install_python() {
         fi
     fi
     
-    # Install pip packages
+    # Install pipx for Python application management
+    print_step "Installing pipx for Python package management..."
+    if ! command_exists pipx; then
+        brew install pipx
+        pipx ensurepath
+    fi
+    
+    # Install essential Python packages via Homebrew (respects system management)
     print_step "Installing essential Python packages..."
-    pip3 install --user requests numpy pandas jupyter
+    brew install numpy || true
+    
+    # Install development tools via pipx (isolated environments)
+    print_step "Installing Python development tools..."
+    pipx install jupyter 2>/dev/null || print_info "Jupyter installation skipped (may already exist)"
+    
+    print_info "For project-specific packages, use virtual environments:"
+    print_info "  python3 -m venv myproject && source myproject/bin/activate && pip install package_name"
 }
 
 #######################################################################################
