@@ -419,8 +419,6 @@ install_database_tools() {
     print_step "Installing PostgreSQL..."
     brew install postgresql@16
     
-    print_step "Installing MySQL..."
-    brew install mysql
     
     print_step "Installing Redis..."
     brew install redis
@@ -518,7 +516,6 @@ verify_installations() {
     [ -d "/Applications/GitHub Desktop.app" ] && echo "  ✅ GitHub Desktop: Installed" || echo "  ❌ GitHub Desktop: Not installed"
     [ -d "/Applications/MAMP" ] && echo "  ✅ MAMP: Installed" || echo "  ❌ MAMP: Not installed"
     command_exists psql && echo "  ✅ PostgreSQL: Installed" || echo "  ❌ PostgreSQL: Not installed"
-    command_exists mysql && echo "  ✅ MySQL: Installed" || echo "  ❌ MySQL: Not installed"
     command_exists redis-cli && echo "  ✅ Redis: Installed" || echo "  ❌ Redis: Not installed"
 }
 

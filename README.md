@@ -53,7 +53,7 @@ Set-ExecutionPolicy Bypass -Scope Process -Force; Invoke-Expression ((New-Object
 ### 🐳 **Additional Tools**
 - **Docker Desktop** - Containerization
 - **MAMP** - Local development server (Apache, MySQL, PHP)
-- **Databases** - PostgreSQL, MySQL, Redis, MongoDB
+- **Databases** - PostgreSQL, MySQL (via MAMP on macOS), Redis, MongoDB
 - **WSL 2 + Ubuntu** - Linux environment (Windows only)
 
 ## 🖥️ Platform-Specific Features

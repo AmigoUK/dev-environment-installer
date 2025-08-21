@@ -41,7 +41,7 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/AmigoUK/dev-environmen
 - **Mobile Dev**: Flutter SDK, Firebase CLI, Android SDK
 - **AI Assistants**: Claude Code + 74 agents, Qwen Coder, GitHub Copilot
 - **Local Development**: MAMP (Apache, MySQL, PHP)
-- **Additional**: Docker, Databases (PostgreSQL, MySQL, Redis, MongoDB)
+- **Additional**: Docker, Databases (PostgreSQL, MySQL via MAMP, Redis, MongoDB)
 - **Platform Specific**: WSL2 + Ubuntu (Windows), Homebrew (macOS)
 
 ## 🎯 Installation Options
