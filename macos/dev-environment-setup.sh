@@ -358,9 +358,27 @@ install_claude_agents() {
     if [ -d "$HOME/.claude/agents" ]; then
         print_step "Updating existing agents..."
         cd "$HOME/.claude/agents"
-        git pull origin main
+        
+        # Check if git repository is in a valid state
+        if git status >/dev/null 2>&1; then
+            # Try to pull updates, handle various branch scenarios
+            git pull origin main 2>/dev/null || \
+            git pull origin master 2>/dev/null || \
+            {
+                print_warning "Failed to update agents. Re-cloning repository..."
+                cd "$HOME/.claude"
+                rm -rf agents
+                git clone https://github.com/wshobson/agents.git
+            }
+        else
+            print_warning "Invalid git repository. Re-cloning agents..."
+            cd "$HOME/.claude"
+            rm -rf agents
+            git clone https://github.com/wshobson/agents.git
+        fi
     else
         print_step "Cloning agents repository..."
+        mkdir -p "$HOME/.claude"
         cd "$HOME/.claude"
         git clone https://github.com/wshobson/agents.git
     fi
