@@ -1,0 +1,54 @@
+# Development Environment Installer .gitignore
+
+# Log files
+*.log
+dev-setup-*.log
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Windows specific
+desktop.ini
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+tmp/
+
+# Editor specific
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Backup files
+*.backup
+*.bak
+
+# Test directories
+test-installs/
+test-environments/
+
+# Local configuration files
+config.local.*
+.env.local
+
+# Download cache
+downloads/
+installers/
+
+# User specific files
+user-configs/
+personal-settings/
+
+# Logs from installers
+install-*.log
+setup-*.log
